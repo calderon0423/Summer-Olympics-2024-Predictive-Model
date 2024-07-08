@@ -7,12 +7,13 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor 
+from sklearn.svm import SVR
 
 
 
 #select columns to drop based on data exploration
 def drop_columns(df):
-    df = df.drop(columns=['Athlete','City','Discipline','Event'])
+    df = df.drop(columns=['Athlete','Sport','Discipline']) 
     return df
 
 def preprocess_olympics_data(df):
@@ -20,8 +21,8 @@ def preprocess_olympics_data(df):
     Written for Summer olympics data; will split into training
     and testing sets. Uses Medal as the target column.
     """
-    X = df.drop(columns='Medal_count')
-    y = df['Medal_count'].values.reshape(-1, 1)
+    X = df.drop(columns='Medal')
+    y = df['Medal'].values.reshape(-1, 1)
     return train_test_split(X, y)
 
 def r2_adj(x, y, pipeline):
@@ -41,10 +42,12 @@ def check_metrics(X_test, y_test, pipeline):
     print(f"Mean Squared Error: {mean_squared_error(y_test, y_pred)}")
     print(f"R-squared: {r2_score(y_test, y_pred)}")
     print(f"Adjusted R-squared: {r2_adj(X_test, y_test, pipeline)}")
-
     return r2_adj(X_test, y_test, pipeline)
 
-def get_best_pipeline(pipeline1, pipeline2,pipeline3,df):
+
+
+
+def get_best_pipeline(pipeline1, pipeline2,pipeline3,pipeline4,df):
     """
     Accepts two pipelines and olympics medals data.
     Uses two different preprocessing functions to 
@@ -62,11 +65,8 @@ def get_best_pipeline(pipeline1, pipeline2,pipeline3,df):
     # Print out the MSE, r-squared, and adjusted r-squared values
     # and collect the adjusted r-squared for the first pipeline
     p1_adj_r2 = check_metrics(X_test, y_test, pipeline1)
-
-
-    # Apply the preprocess_olympics_data
-    X_train, X_test, y_train, y_test = preprocess_olympics_data(df)
-
+    print("------------------------------------------")
+    
     # Fit the second pipeline
     pipeline2.fit(X_train, y_train)
     print("Testing Random Forest Regressor")
@@ -74,10 +74,8 @@ def get_best_pipeline(pipeline1, pipeline2,pipeline3,df):
     # Print out the MSE, r-squared, and adjusted r-squared values
     # and collect the adjusted r-squared for the second pipeline
     p2_adj_r2 = check_metrics(X_test, y_test, pipeline2)
-
-    # Apply the preprocess_olympics_data
-    X_train, X_test, y_train, y_test = preprocess_olympics_data(df)
-
+    print("------------------------------------------")
+    
     # Fit the third pipeline
     pipeline3.fit(X_train, y_train)
     print("Testing XGB Regressor")
@@ -85,22 +83,44 @@ def get_best_pipeline(pipeline1, pipeline2,pipeline3,df):
     # Print out the MSE, r-squared, and adjusted r-squared values
     # and collect the adjusted r-squared for the second pipeline
     p3_adj_r2 = check_metrics(X_test, y_test, pipeline3)
-
+    print("------------------------------------------")
+    
+    # Fit the fourth pipeline
+    pipeline4.fit(X_train, y_train)
+    print("Testing SVR Regressor")
+    
+    # Print out the MSE, r-squared, and adjusted r-squared values
+    # and collect the adjusted r-squared for the second pipeline
+    p4_adj_r2 = check_metrics(X_test, y_test, pipeline4)
+    print("------------------------------------------")
+    
     # Compare the adjusted r-squared for each pipeline and 
     # return the best model
-    if p2_adj_r2 > p1_adj_r2:
-        if p2_adj_r2 > p3_adj_r2:
-            print("Random Forest Classifier is the best model")
+    if p1_adj_r2 > p2_adj_r2:
+        if p1_adj_r2 > p3_adj_r2:
+            if p1_adj_r2 > p4_adj_r2:
+                print("Linear Regression is the best model.")
+                return pipeline1
+            else:
+                print("SVR Regressor is the best model.")
+                return pipeline4
+        elif p3_adj_r2 > p4_adj_r2:
+            print("XGB Regressor is the best model.")
+            return pipeline3
+    elif p2_adj_r2 > p3_adj_r2:
+        if p2_adj_r2 > p4_adj_r2:
+            print(("Random Forest Regressor is the best model."))
             return pipeline2
         else:
-            print("XGB Regressor is the best model")
-            return pipeline3
-    elif p1_adj_r2 > p3_adj_r2:
-        print("Linear Regression is the best model")
-        return pipeline1
-    else: 
-        print("XGB Regressor is the best model")
+            print("SVR Regressor is the best model.")
+            return pipeline4
+    elif p3_adj_r2 > p4_adj_r2:
+        print("XGB Regressor is the best model.")
         return pipeline3
+    else: 
+        print("SVR Regressor is the best model.")
+        return pipeline4
+    
 
 #select models to test
 def medal_model_generator(df):
@@ -113,16 +133,16 @@ def medal_model_generator(df):
     """
     # Create a list of steps for a pipeline that will one hot encode and scale data
     # Each step should be a tuple with a name and a function
-    
 
-    model1 = [("One hot encode", OneHotEncoder(handle_unknown="ignore")), 
-             ("Linear Regression", LinearRegression())] 
+    model1 = [("Linear Regression", LinearRegression())]
 
-    model2 = [("One hot encode", OneHotEncoder(handle_unknown="ignore")), 
-             ("Random Forest Regressor", RandomForestRegressor())] 
+    model2 = [("Random Forest Regressor", RandomForestRegressor())] 
 
-    model3 = [("One hot encode", OneHotEncoder(handle_unknown="ignore")), 
-             ("XGB Regressor", XGBRegressor())] 
+    model3 = [("XGB Regressor", XGBRegressor())] 
+
+    model4 = [('Linear SVR', SVR())]
+
+
 
     # Create a pipeline object
     pipeline1 = Pipeline(model1)
@@ -133,8 +153,12 @@ def medal_model_generator(df):
     # Create a third pipeline object
     pipeline3 = Pipeline(model3)
 
+    # Create a fourth pipeline object
+    pipeline4 = Pipeline(model4)
+
     # Get the best pipeline
-    pipeline = get_best_pipeline(pipeline1, pipeline2, pipeline3,df)
+    pipeline = get_best_pipeline(pipeline1, pipeline2, pipeline3,pipeline4,df)
+
 
     # Return the trained model
     return pipeline
