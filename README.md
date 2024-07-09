@@ -79,13 +79,6 @@ Each model was evaluated using metrics such as Mean Squared Error (MSE), R-squar
 - Achieved the highest accuracy among the evaluated models with the best R-squared value.
 
 
-
-## Results and Conclusions
-
-- **Linear Regression** provided a solid baseline with an R-squared value of xxx.
-- **Random Forest Regression** improved the prediction accuracy with an R-squared value of xxx.
-- **XGBoost Regression** achieved the highest accuracy with an R-squared value of xxx.
-
 ## Results and Conclusions
 - **Linear Regression** provided a solid baseline with an adjusted R-squared value of 0.32.
 - **Random Forest Regression** improved the prediction accuracy with an adjusted R-squared value of 0.41.
