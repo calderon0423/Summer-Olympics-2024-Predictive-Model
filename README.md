@@ -2,7 +2,7 @@
 
 ## EXECUTIVE SUMMARY: Overview and Objectives
 
-The Summer Olympic Games represent the pinnacle of international sports competition, where athletes from around the world compete for glory and national pride. Our goal with this project is to develop predictive models that can estimate the 2016-2024 medal counts for the top five medal-winning countries, namely the United States of America (USA), Soviet Union (URS), Great Britain (GBR), France (FRA), and Germany (GER), based on past data (1896-2012). By leveraging machine learning algorithms, specifically **Linear Regression**, **Random Forest Regressor**, **XGBoost Regressor**, and **SVR**. , we aim to achieve precise predictions.
+The Summer Olympic Games represent the pinnacle of international sports competition, where athletes from around the world compete for glory and national pride. Our goal with this project is to develop predictive models that can estimate the 2016-2024 medal counts for the United States of America (USA) based on past data (1896-2012). By leveraging machine learning algorithms, specifically **Linear Regression**, **Random Forest Regressor**, **XGBoost Regressor**, and **SVR**. , we aim to achieve precise predictions.
 
 
 
@@ -80,7 +80,24 @@ Each model was evaluated using metrics such as Mean Squared Error (MSE), R-squar
 
 
 ## Results and Conclusions
-- **Linear Regression** provided a solid baseline with an adjusted R-squared value of 0.32.
-- **Random Forest Regression** improved the prediction accuracy with an adjusted R-squared value of 0.41.
-- **XGBoost Regression** achieved the highest accuracy with an adjusted R-squared value of 0.80, making it the best model for predicting the 2016-2024 Olympic medal counts.
-- **SVR Regressor** was included for comparison but did not outperform XGBoost.
+### Testing Linear Regression
+- Mean Squared Error: 169.13767243728768
+- R-squared: 0.9812702073506133
+- Adjusted R-squared: 0.9625404147012266
+
+### Testing Random Forest Regressor
+- Mean Squared Error: 668.1121999999997
+- R-squared: 0.926015282153269
+- Adjusted R-squared: 0.852030564306538
+
+### Testing XGB Regressor
+- Mean Squared Error: 1577.9070005943565
+- R-squared: 0.8252673745155334
+- Adjusted R-squared: 0.6505347490310669
+
+### Testing SVR Regressor
+- Mean Squared Error: 9317.099648585581
+- R-squared: -0.031747345207108424
+- Adjusted R-squared: -1.0634946904142168
+  
+### Linear Regression is the best model.
