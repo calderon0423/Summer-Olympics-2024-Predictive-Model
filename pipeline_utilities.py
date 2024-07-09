@@ -13,7 +13,7 @@ from sklearn.svm import SVR
 
 #select columns to drop based on data exploration
 def drop_columns(df):
-    df = df.drop(columns=['Athlete','Sport','Discipline']) 
+    df = df.drop(columns=['Event','Gender','Year']) 
     return df
 
 def preprocess_olympics_data(df):
