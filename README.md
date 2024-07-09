@@ -14,7 +14,7 @@ The Summer Olympic Games represent the pinnacle of international sports competit
 
 #### Data Cleaning
 - Handling missing values by imputing relevant statistics (e.g., mean or median) for numerical columns.
-- Dropping non-relevant columns such as 'Athlete', 'City', 'Discipline', and 'Event'.
+- Dropping non-relevant columns such as 'Athlete', 'Sport', and 'Discipline'.
 
 #### Data Encoding
 - Encoding categorical variables using One Hot Encoding for features like event type and athlete nationality.
