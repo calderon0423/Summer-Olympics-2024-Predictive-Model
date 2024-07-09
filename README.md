@@ -100,4 +100,4 @@ Each model was evaluated using metrics such as Mean Squared Error (MSE), R-squar
 - R-squared: -0.031747345207108424
 - Adjusted R-squared: -1.0634946904142168
   
-- Linear Regression is the best model.
+### Linear Regression is the best model.
