@@ -80,24 +80,24 @@ Each model was evaluated using metrics such as Mean Squared Error (MSE), R-squar
 
 
 ## Results and Conclusions
--- Testing Linear Regression
-Mean Squared Error: 169.13767243728768
-R-squared: 0.9812702073506133
-Adjusted R-squared: 0.9625404147012266
+### Testing Linear Regression
+- Mean Squared Error: 169.13767243728768
+- R-squared: 0.9812702073506133
+- Adjusted R-squared: 0.9625404147012266
 ------------------------------------------
--- Testing Random Forest Regressor
-Mean Squared Error: 668.1121999999997
-R-squared: 0.926015282153269
-Adjusted R-squared: 0.852030564306538
+### Testing Random Forest Regressor
+- Mean Squared Error: 668.1121999999997
+- R-squared: 0.926015282153269
+- Adjusted R-squared: 0.852030564306538
 ------------------------------------------
--- Testing XGB Regressor
-Mean Squared Error: 1577.9070005943565
-R-squared: 0.8252673745155334
-Adjusted R-squared: 0.6505347490310669
+### Testing XGB Regressor
+- Mean Squared Error: 1577.9070005943565
+- R-squared: 0.8252673745155334
+- Adjusted R-squared: 0.6505347490310669
 ------------------------------------------
--- Testing SVR Regressor
-Mean Squared Error: 9317.099648585581
-R-squared: -0.031747345207108424
-Adjusted R-squared: -1.0634946904142168
+### Testing SVR Regressor
+- Mean Squared Error: 9317.099648585581
+- R-squared: -0.031747345207108424
+- Adjusted R-squared: -1.0634946904142168
 ------------------------------------------
-Linear Regression is the best model.
+### Linear Regression is the best model.
