@@ -2,7 +2,7 @@
 
 ## EXECUTIVE SUMMARY: Overview and Objectives
 
-The Summer Olympic Games represent the pinnacle of international sports competition, where athletes from around the world compete for glory and national pride. Our goal with this project is to develop predictive models that can estimate the 2024 medal counts for the top five medal-winning countries, namely the United States of America (USA), Soviet Union (URS), Great Britain (GBR), France (FRA), and Germany (GER), based on past data (1896-2012). By leveraging machine learning algorithms, specifically **Linear Regression**, **Random Forest Regressor**, **XGBoost Regressor**, and **SVR**. , we aim to achieve precise predictions.
+The Summer Olympic Games represent the pinnacle of international sports competition, where athletes from around the world compete for glory and national pride. Our goal with this project is to develop predictive models that can estimate the 2016-2024 medal counts for the top five medal-winning countries, namely the United States of America (USA), Soviet Union (URS), Great Britain (GBR), France (FRA), and Germany (GER), based on past data (1896-2012). By leveraging machine learning algorithms, specifically **Linear Regression**, **Random Forest Regressor**, **XGBoost Regressor**, and **SVR**. , we aim to achieve precise predictions.
 
 
 
@@ -82,5 +82,5 @@ Each model was evaluated using metrics such as Mean Squared Error (MSE), R-squar
 ## Results and Conclusions
 - **Linear Regression** provided a solid baseline with an adjusted R-squared value of 0.32.
 - **Random Forest Regression** improved the prediction accuracy with an adjusted R-squared value of 0.41.
-- **XGBoost Regression** achieved the highest accuracy with an adjusted R-squared value of 0.80, making it the best model for predicting the 2024 Olympic medal counts.
+- **XGBoost Regression** achieved the highest accuracy with an adjusted R-squared value of 0.80, making it the best model for predicting the 2016-2024 Olympic medal counts.
 - **SVR Regressor** was included for comparison but did not outperform XGBoost.
